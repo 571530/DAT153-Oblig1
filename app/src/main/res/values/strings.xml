@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">oblig1</string>
+    <string name="title_activity_database">database</string>
+    <string name="database_button">Database</string>
+    <string name="quiz_button">Quiz!!</string>
+    <string name="add_button">Add person</string>
+    <string name="add_new_person">Add!!</string>
+    <string name="upload_image">Upload image</string>
+    <string name="quiz_next">Next person!</string>
+    <string name="quiz_submit">Submit</string>
+    <string name="stop_quiz">Stop quiz</string>
+    <string name="quiz_stop">STOP QUIZZ</string>
+    <string name="correct_answer">Correct answer was %s</string>
+    <string name="remove_button">Remove</string>
+    <string name="take_picture">Take picture!</string>
+    <string name="empty" />
+    <string name="goto_result">Show results!</string>
+    <string name="new_quiz">New quiz!</string>
+</resources>
