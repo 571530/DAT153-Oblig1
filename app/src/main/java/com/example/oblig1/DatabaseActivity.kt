@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.DividerItemDecoration
 
 
-
-
-
 class DatabaseActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PersonAdapter
@@ -31,10 +28,11 @@ class DatabaseActivity : AppCompatActivity() {
             (recyclerView.layoutManager as LinearLayoutManager).orientation
         )
         recyclerView.addItemDecoration(dividerItemDecoration)
-        recyclerView.addOnLayoutChangeListener{
-                _, _, _, _, _, _, _, _, _ -> // ☹☹☹
+        recyclerView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            // ☹☹☹
             updateVisibility()
         }
+
         adapter = PersonAdapter(data)
         recyclerView.adapter = adapter
     }
@@ -47,7 +45,11 @@ class DatabaseActivity : AppCompatActivity() {
 
     private fun updateVisibility() {
         val textView = findViewById<TextView>(R.id.no_items)
-        textView.visibility = if (data.size > 0) View.INVISIBLE else View.VISIBLE
+        textView.visibility =
+            if (data.size > 0)
+                View.INVISIBLE
+            else
+                View.VISIBLE
     }
 
     override fun onResume() {
