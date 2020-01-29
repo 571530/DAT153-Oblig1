@@ -28,4 +28,12 @@
         android:onClick="startAdd"
         app:backgroundTint="@color/design_default_color_primary"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <TextView
+        android:id="@+id/no_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_items"
+        android:visibility="invisible" />
 </RelativeLayout>

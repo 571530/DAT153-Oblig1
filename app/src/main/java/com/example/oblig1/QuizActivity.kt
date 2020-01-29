@@ -1,5 +1,6 @@
 package com.example.oblig1
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_quiz.*
 
 
@@ -35,9 +37,7 @@ class QuizActivity : AppCompatActivity() {
             Toast.makeText(this, "There are no persons!! Add some before starting the quiz", Toast.LENGTH_LONG).also {
                 it.show()
             }
-            Intent(this, MainActivity::class.java).also {
-                startActivity(it)
-            }
+            finish()
         }
         else {
             updateButton()
@@ -87,12 +87,12 @@ class QuizActivity : AppCompatActivity() {
         val guess = guessView.text.toString()
         val answer = shuffledData[currentIndex].name
 
-        if (guess == answer) {
+        if (guess.equals(answer, ignoreCase = true)) {
             correct++
-            guessView.setTextColor(resources.getColor(R.color.correctColor))
+            guessView.setTextColor(ContextCompat.getColor(this, R.color.correctColor))
         }
         else {
-            guessView.setTextColor(resources.getColor(R.color.wrongColor))
+            guessView.setTextColor(ContextCompat.getColor(this, R.color.wrongColor))
             val answerView = findViewById<TextView>(R.id.answer)
             answerView.text = getString(R.string.correct_answer).format(answer)
         }
@@ -107,7 +107,7 @@ class QuizActivity : AppCompatActivity() {
 
         val guessView = findViewById<TextView>(R.id.guessText)
         guessView.text = ""
-        guessView.setTextColor(resources.getColor(R.color.browser_actions_text_color))
+        guessView.setTextColor(ContextCompat.getColor(this, R.color.browser_actions_text_color))
 
         nextPerson()
         updateButton()

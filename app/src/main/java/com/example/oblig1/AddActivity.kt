@@ -69,7 +69,7 @@ class AddActivity : AppCompatActivity() {
                 toast.show()
             }
             text.isEmpty() -> {
-                val toast = Toast.makeText(this, "MISSING TEXT!!!11!1!!!!111!11!111!!!!1!", Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(this, "MISSING TEXT!", Toast.LENGTH_SHORT)
                 toast.show()
             }
             else -> {
