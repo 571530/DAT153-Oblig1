@@ -4,31 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuizActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".QuizActivity">
 
     <EditText
         android:id="@+id/guessText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Name here"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guessImage" />
 
     <ImageView
         android:id="@+id/guessImage"
         android:layout_width="241dp"
         android:layout_height="245dp"
-        app:layout_constraintBottom_toTopOf="@+id/guessText"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@id/guessText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
+        app:layout_constraintTop_toBottomOf="@id/score"
+        app:layout_constraintVertical_bias="0.41" />
 
     <Button
         android:id="@+id/nextButton"
@@ -36,10 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="68dp"
         android:layout_marginRight="68dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="84dp"
         android:background="@drawable/button_background"
-        android:padding="10dp"
         android:onClick="handleButtonClick"
+        android:padding="10dp"
         android:text="@string/goto_result"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -48,10 +51,10 @@
         android:id="@+id/stopButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="stopQuizClick"
-        android:text="@string/quiz_stop"
         android:background="@drawable/button_background"
+        android:onClick="stopQuizClick"
         android:padding="10dp"
+        android:text="@string/quiz_stop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="0.349"
@@ -63,10 +66,24 @@
         android:id="@+id/answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/empty"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guessText"
         app:layout_constraintVertical_bias="0.307" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guessImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,4 +16,5 @@
     <string name="empty" />
     <string name="goto_result">Show results!</string>
     <string name="new_quiz">New quiz!</string>
+    <string name="score_text">%s / %s correct</string>
 </resources>

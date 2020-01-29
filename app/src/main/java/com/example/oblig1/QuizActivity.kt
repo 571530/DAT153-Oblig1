@@ -45,6 +45,11 @@ class QuizActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateScoreText() {
+        val text = findViewById<TextView>(R.id.score)
+
+        text.text = getString(R.string.score_text).format(correct, currentIndex + 1)
+    }
 
     private fun updateButton() {
         val nextButton = findViewById<Button>(R.id.nextButton)
@@ -93,6 +98,7 @@ class QuizActivity : AppCompatActivity() {
         }
 
         updateButton()
+        updateScoreText()
     }
 
     private fun nextQuestion() {
