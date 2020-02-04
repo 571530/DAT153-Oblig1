@@ -2,6 +2,7 @@ package com.example.oblig1
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_quiz.*
 
 
@@ -31,18 +35,22 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        shuffledData = PersonDatabase(application).all().shuffled()
+        val viewModel = ViewModelProvider(this).get(PersonViewModel::class.java)
 
-        if (shuffledData.isEmpty()) {
-            Toast.makeText(this, "There are no persons!! Add some before starting the quiz", Toast.LENGTH_LONG).also {
-                it.show()
+        viewModel.allPersons.observe(this, Observer {persons ->
+            shuffledData = persons.shuffled()
+
+            if (shuffledData.isEmpty()) {
+                Toast.makeText(this, "There are no persons!! Add some before starting the quiz", Toast.LENGTH_LONG).also {
+                    it.show()
+                }
+                finish()
             }
-            finish()
-        }
-        else {
-            updateButton()
-            showImage()
-        }
+            else {
+                updateButton()
+                showImage()
+            }
+        })
     }
 
     private fun updateScoreText() {
@@ -65,7 +73,6 @@ class QuizActivity : AppCompatActivity() {
         intent.putExtra("correct", correct)
         intent.putExtra("total", total)
         startActivity(intent)
-
     }
 
     fun handleButtonClick(view: View) {
@@ -109,11 +116,11 @@ class QuizActivity : AppCompatActivity() {
         guessView.text = ""
         guessView.setTextColor(ContextCompat.getColor(this, R.color.browser_actions_text_color))
 
+        state = STATE.GUESSING
+
         nextPerson()
         updateButton()
         showImage()
-
-        state = STATE.GUESSING
     }
 
     private fun nextPerson() {
@@ -125,7 +132,10 @@ class QuizActivity : AppCompatActivity() {
     private fun showImage() {
         val imageView = findViewById<ImageView>(R.id.guessImage)
         if (currentIndex < shuffledData.size) {
-            imageView.setImageBitmap(shuffledData[currentIndex].image)
+            Glide
+                .with(this)
+                .load(shuffledData[currentIndex]?.filepath)
+                .into(imageView)
         }
     }
 

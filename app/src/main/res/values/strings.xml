@@ -18,4 +18,6 @@
     <string name="new_quiz">New quiz!</string>
     <string name="score_text">%s / %s correct</string>
     <string name="no_items">Database is empty! Add some persons</string>
+    <string name="title_activity_set_name">SetNameActivity</string>
+    <string name="set_name_hint">Write your name!!</string>
 </resources>

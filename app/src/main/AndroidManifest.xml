@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.oblig1">
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".Oblig1Application"
         android:allowBackup="true"
@@ -11,9 +19,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuizResultActivity"
-            android:parentActivityName=".MainActivity"
-            android:noHistory="true"></activity>
+        <activity
+            android:name=".SetNameActivity"
+            android:label="@string/title_activity_set_name"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".QuizResultActivity"
+            android:noHistory="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".QuizActivity"
             android:noHistory="true"
@@ -28,6 +52,10 @@
 
         <activity
             android:name=".DatabaseActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/PreferenceScreen"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
