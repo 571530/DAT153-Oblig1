@@ -160,5 +160,4 @@ class AddActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.editText)
         textView.text = ""
     }
-
 }

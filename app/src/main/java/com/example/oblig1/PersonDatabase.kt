@@ -73,14 +73,14 @@ abstract class PersonDatabase: RoomDatabase() {
 
         suspend fun populateDatabase(personDao: PersonDao) {
             if (personDao.getCount() == 0) {
-                val person1 = Person(name="cage", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.nic_cage).toString())
+                /*val person1 = Person(name="cage", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.nic_cage).toString())
                 personDao.insert(person1)
                 val person2 = Person(name="cat", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.grumpy_cat).toString())
                 personDao.insert(person2)
                 val person3 = Person(name="turtle", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.turtle).toString())
                 personDao.insert(person3)
                 val person4 = Person(name="dog", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.dog).toString())
-                personDao.insert(person4)
+                personDao.insert(person4)*/
             }
         }
     }

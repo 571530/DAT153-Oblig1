@@ -7,6 +7,7 @@ import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,16 +15,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        actionBar?.let {
-
-        }
-
 
         if (!isNameSet()) {
             Intent(this, SetNameActivity::class.java).also {
                 startActivity(it)
             }
+            greeting.text = "Hello ${getName()}"
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        greeting.text = "Hello ${getName()}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,12 +45,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isNameSet(): Boolean {
+        return !getName().isEmpty()
+    }
+
+    private fun getName(): String {
         val PREF_NAME = "name"
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
 
         val name = sharedPref.getString(PREF_NAME, "")
-        return name.isNotEmpty()
+        return name
     }
 
     fun startDatabase(view: View) {
