@@ -3,6 +3,7 @@ package com.example.oblig1
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,26 +32,48 @@ class QuizActivity : AppCompatActivity() {
 
     var state = STATE.GUESSING
 
+    private val isRunningTest : Boolean by lazy {
+        try {
+            Class.forName("androidx.test.espresso.Espresso")
+            true
+        }
+        catch (e: ClassNotFoundException) {
+            false
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        val viewModel = ViewModelProvider(this).get(PersonViewModel::class.java)
 
-        viewModel.allPersons.observe(this, Observer {persons ->
-            shuffledData = persons.shuffled()
+        if (isRunningTest) {
+            shuffledData = listOf(
+                Person(name="cage", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.nic_cage).toString()),
+                Person(name="dog", filepath=Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.dog).toString())
+            )
+            updateButton()
+            showImage()
+        }
+        else {
+            val viewModel = ViewModelProvider(this).get(PersonViewModel::class.java)
 
-            if (shuffledData.isEmpty()) {
-                Toast.makeText(this, "There are no persons!! Add some before starting the quiz", Toast.LENGTH_LONG).also {
-                    it.show()
+            viewModel.allPersons.observe(this, Observer {persons ->
+                shuffledData = persons.shuffled()
+
+                if (shuffledData.isEmpty()) {
+                    Toast.makeText(this, "There are no persons!! Add some before starting the quiz", Toast.LENGTH_LONG).also {
+                        it.show()
+                    }
+                    finish()
                 }
-                finish()
-            }
-            else {
-                updateButton()
-                showImage()
-            }
-        })
+                else {
+                    updateButton()
+                    showImage()
+                }
+            })
+
+        }
     }
 
     private fun updateScoreText() {
